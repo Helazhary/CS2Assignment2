@@ -65,6 +65,7 @@ void MainWindow::on_STLSortpb_clicked()
 {
     if (DataSetGenerated==true && sorted==false)
     {
+                ui->SortTypeLabel->setText("Sorted Using STL Sort");
         sorted=true;
         sort(arr,arr+arrsize);
         ui->ArrayDisplay->clear();
@@ -83,6 +84,7 @@ void MainWindow::on_MergeSortpb_clicked()
 
     if (DataSetGenerated==true && sorted==false)
     {
+        ui->SortTypeLabel->setText("Sorted Using Merge Sort");
         sorted=true;
            mergeSort(arr,0,arrsize-1);
          ui->ArrayDisplay->clear();
