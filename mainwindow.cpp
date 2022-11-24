@@ -29,9 +29,9 @@ void MainWindow::on_GenerateDatasetpb_clicked()
         ui->ArrayDisplay->clear();
         arrsize = ui->InputDatasetSizeLineEdit->text().toInt();
         arr = new int[arrsize];
-            for (int i=0; i<arrsize; i++) //filling array with random integers 1-99
+            for (int i=0; i<arrsize; i++) //filling array with random integers 1-1000
             {
-                arr[i]=(1+rand()%99);
+                arr[i]=(1+rand()%1000);
             }
             for (int i=0; i<arrsize; i++) //displaying unsorted array
             {
