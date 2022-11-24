@@ -21,6 +21,7 @@ public:
     ~MainWindow();
     void mergeSort(int *array, int l, int r);
     void merge(int *array, int l, int m, int r);
+    int binarySearch(int array[], int x, int low, int high);
 
 private slots:
     void on_GenerateDatasetpb_clicked();
@@ -32,6 +33,7 @@ private slots:
     void on_STLSortpb_clicked();
 
     void on_MergeSortpb_clicked();
+    void on_pbfindit_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -44,3 +46,4 @@ private:
 
 };
 #endif // MAINWINDOW_H
+//hi
