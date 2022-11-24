@@ -62,5 +62,6 @@ void MainWindow::on_STLSortpb_clicked()
         {
            ui->ArrayDisplay->setText(ui->ArrayDisplay->text() + "\n" + QString::number(arr[i]));
         }
+        ui->UnsortedArrLabel->setText("Sorted Array");
     }
 }
