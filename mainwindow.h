@@ -19,6 +19,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void mergeSort(int *array, int l, int r);
+    void merge(int *array, int l, int m, int r);
 
 private slots:
     void on_GenerateDatasetpb_clicked();
@@ -29,13 +31,15 @@ private slots:
 
     void on_STLSortpb_clicked();
 
+    void on_MergeSortpb_clicked();
+
 private:
     Ui::MainWindow *ui;
     bool DataSetGenerated = false;
     bool sorted = false;
     QString SearchType;
     int arrsize;
-    int *arr = new int[arrsize];
+    int *arr ;
 
 
 };
