@@ -21,9 +21,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_GenerateDatasetpb_clicked()
 {
-    if (ui->InputDatasetSizeLineEdit->text()!="" && DataSetGenerated == false)
+    if (ui->InputDatasetSizeLineEdit->text()!="")
     {
         DataSetGenerated = true;
+        sorted = false;
+        ui->ArrayDisplay->setText("");
         arrsize = ui->InputDatasetSizeLineEdit->text().toInt();
             for (int i=0; i<arrsize; i++) //filling array with random integers 1-99
             {
@@ -33,7 +35,7 @@ void MainWindow::on_GenerateDatasetpb_clicked()
             {
                ui->ArrayDisplay->setText(ui->ArrayDisplay->text() + "\n" + QString::number(arr[i]));
             }
-
+            ui->UnsortedArrLabel->setText("Unsorted Array");
     }
 }
 
@@ -93,7 +95,7 @@ void MainWindow::on_pbfindit_clicked()
 {
     if(DataSetGenerated == true)
     {
-    if(SearchType == "Binary")
+    if(SearchType == "Binary" && sorted==true)
     {
         int result = binarySearch(arr, (ui->SearchValueLineEdit->text()).toInt(), 0, arrsize - 1);
         if(result == -1)
@@ -102,6 +104,10 @@ void MainWindow::on_pbfindit_clicked()
         }
         else
             ui->found->setText("found");
+    }
+    else if (SearchType == "Binary" && sorted == false)
+    {
+        ui->SearchValueLineEdit->setText("Please sort array to use binary search!");
     }
     else if(SearchType == "Normal")
     {
