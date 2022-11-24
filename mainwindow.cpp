@@ -187,13 +187,13 @@ void MainWindow::on_pbfindit_clicked()
         std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
         this->searchtime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
 
-        if(!result)
+        if(result)
         {
             QMessageBox::information(this,"REPORT","the time taken to search for this number in nanoseconds is "+QString::number(this->searchtime)+" and the time taken to sort the list was "+QString::number(this->sorttime));
 
         }else
         {
-          QMessageBox::information(this,"REPORT","There is no such number you blind");
+          QMessageBox::information(this,"REPORT","THERE IS NO SUCH NUMBER, YOU BLIND\n we wasted "+QString::number(this->searchtime)+" nanoseconds to seach for that number  and "+QString::number(this->sorttime)+" to sort the list");
         }
     }
 
@@ -214,8 +214,8 @@ void MainWindow::on_pbfindit_clicked()
 
         }else
         {
-          QMessageBox::information(this,"REPORT","There is no such number you blind");        }
-
+         QMessageBox::information(this,"REPORT","THERE IS NO SUCH NUMBER, YOU BLIND\n we wasted "+QString::number(this->searchtime)+" nanoseconds to seach for that number  and "+QString::number(this->sorttime)+" to sort the list");
+}
     }
     }
     else
