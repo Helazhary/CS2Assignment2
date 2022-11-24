@@ -41,6 +41,22 @@ void MainWindow::on_NormalSearchpb_clicked()
 {
     ui->Usingxsearch->setText("Using: Normal Search...");
     SearchType = "Normal";
+    bool x=false;
+    for (int i=0; i<arrsize; i++)
+    {
+       if(arr[i] == (ui->SearchValueLineEdit->text()).toInt())
+       {
+           x=true;
+           //ui->found->setText("found");
+       }
+    }
+    if(x)
+    {
+        ui->found->setText("found");
+    }
+    else
+        ui->found->setText("NOT found");
+
 }
 
 
@@ -48,6 +64,13 @@ void MainWindow::on_BinarySearchpb_clicked()
 {
     ui->Usingxsearch->setText("Using: Binary Search...");
     SearchType = "Binary";
+    int f = binarySearch(arr, (ui->SearchValueLineEdit->text()).toInt(), 0, arrsize - 1);
+    if(f == -1)
+    {
+        ui->found->setText("NOT found");
+    }
+    else
+        ui->found->setText("found");
 }
 
 
@@ -64,4 +87,23 @@ void MainWindow::on_STLSortpb_clicked()
         }
         ui->UnsortedArrLabel->setText("Sorted Array");
     }
+}
+
+int MainWindow::binarySearch(int array[], int x, int low, int high) {
+
+    // Repeat until the pointers low and high meet each other
+  while (low <= high) {
+    int mid = low + (high - low) / 2;
+
+    if (array[mid] == x)
+      return mid;
+
+    if (array[mid] < x)
+      low = mid + 1;
+
+    else
+      high = mid - 1;
+  }
+
+  return -1;
 }

@@ -19,6 +19,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    int binarySearch(int array[], int x, int low, int high);
 
 private slots:
     void on_GenerateDatasetpb_clicked();
