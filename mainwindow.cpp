@@ -187,7 +187,7 @@ void MainWindow::on_pbfindit_clicked()
         std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
         this->searchtime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
 
-        if(!result)
+        if(result)
         {
             QMessageBox::information(this,"REPORT","the time taken to search for this number in nanoseconds is "+QString::number(this->searchtime)+" and the time taken to sort the list was "+QString::number(this->sorttime));
 
