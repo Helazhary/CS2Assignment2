@@ -91,6 +91,8 @@ int MainWindow::binarySearch(int array[], int x, int low, int high) {
 
 void MainWindow::on_pbfindit_clicked()
 {
+    if(DataSetGenerated == true)
+    {
     if(SearchType == "Binary")
     {
         int result = binarySearch(arr, (ui->SearchValueLineEdit->text()).toInt(), 0, arrsize - 1);
@@ -119,6 +121,8 @@ void MainWindow::on_pbfindit_clicked()
         else
             ui->found->setText("NOT found");
     }
-
+}
+    else
+        ui->found->setText("NO DATA GENERATED");
 }
 
