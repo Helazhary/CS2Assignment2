@@ -42,21 +42,7 @@ void MainWindow::on_NormalSearchpb_clicked()
 {
     ui->Usingxsearch->setText("Using: Normal Search...");
     SearchType = "Normal";
-    bool x=false;
-    for (int i=0; i<arrsize; i++)
-    {
-       if(arr[i] == (ui->SearchValueLineEdit->text()).toInt())
-       {
-           x=true;
-           //ui->found->setText("found");
-       }
-    }
-    if(x)
-    {
-        ui->found->setText("found");
-    }
-    else
-        ui->found->setText("NOT found");
+
 
 }
 
@@ -65,13 +51,7 @@ void MainWindow::on_BinarySearchpb_clicked()
 {
     ui->Usingxsearch->setText("Using: Binary Search...");
     SearchType = "Binary";
-    int f = binarySearch(arr, (ui->SearchValueLineEdit->text()).toInt(), 0, arrsize - 1);
-    if(f == -1)
-    {
-        ui->found->setText("NOT found");
-    }
-    else
-        ui->found->setText("found");
+
 }
 
 
@@ -108,3 +88,37 @@ int MainWindow::binarySearch(int array[], int x, int low, int high) {
 
   return -1;
 }
+
+void MainWindow::on_pbfindit_clicked()
+{
+    if(SearchType == "Binary")
+    {
+        int result = binarySearch(arr, (ui->SearchValueLineEdit->text()).toInt(), 0, arrsize - 1);
+        if(result == -1)
+        {
+            ui->found->setText("NOT found");
+        }
+        else
+            ui->found->setText("found");
+    }
+    else if(SearchType == "Normal")
+    {
+        bool x=false;
+        for (int i=0; i<arrsize; i++)
+        {
+           if(arr[i] == (ui->SearchValueLineEdit->text()).toInt())
+           {
+               x=true;
+               //ui->found->setText("found");
+           }
+        }
+        if(x)
+        {
+            ui->found->setText("found");
+        }
+        else
+            ui->found->setText("NOT found");
+    }
+
+}
+

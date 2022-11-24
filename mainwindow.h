@@ -30,6 +30,8 @@ private slots:
 
     void on_STLSortpb_clicked();
 
+    void on_pbfindit_clicked();
+
 private:
     Ui::MainWindow *ui;
     bool DataSetGenerated = false;
