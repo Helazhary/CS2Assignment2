@@ -182,10 +182,10 @@ void MainWindow::on_pbfindit_clicked()
     if(DataSetGenerated == true)
     {
     if(SearchType == "Binary" && sorted==true)
-    {        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    {        std::chrono::steady_clock::time_point now1 = std::chrono::steady_clock::now();
         bool result = binarySearch(arr, (ui->SearchValueLineEdit->text()).toInt(), 0, arrsize - 1);
-        std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
-        this->searchtime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
+        std::chrono::steady_clock::time_point then1 = std::chrono::steady_clock::now();
+        this->searchtime=std::chrono::duration_cast<std::chrono::nanoseconds>(then1-now1).count();
 
         if(result)
         {
@@ -203,10 +203,10 @@ void MainWindow::on_pbfindit_clicked()
     }
     else if(SearchType == "Normal")
     {
-        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+        std::chrono::steady_clock::time_point now2 = std::chrono::steady_clock::now();
         bool found =normalSearch();
-        std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
-        this->sorttime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
+        std::chrono::steady_clock::time_point then2 = std::chrono::steady_clock::now();
+        this->searchtime=std::chrono::duration_cast<std::chrono::nanoseconds>(then2-now2).count();
 
         if(found)
         {
