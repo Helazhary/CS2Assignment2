@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     srand(time(NULL));
 
-//comment
+//comment here
 
 }
 
