@@ -25,7 +25,7 @@ void MainWindow::on_GenerateDatasetpb_clicked()
     {
         DataSetGenerated = true;
         sorted = false;
-        ui->ArrayDisplay->setText("");
+        ui->ArrayDisplay->clear();
         arrsize = ui->InputDatasetSizeLineEdit->text().toInt();
         arr = new int[arrsize];
             for (int i=0; i<arrsize; i++) //filling array with random integers 1-99
@@ -34,10 +34,13 @@ void MainWindow::on_GenerateDatasetpb_clicked()
             }
             for (int i=0; i<arrsize; i++) //displaying unsorted array
             {
-               ui->ArrayDisplay->setText(ui->ArrayDisplay->text() + "\n" + QString::number(arr[i]));
+               ui->ArrayDisplay->addItem(QString::number(arr[i]));
             }
             ui->UnsortedArrLabel->setText("Unsorted Array");
     }
+
+
+
 }
 
 
@@ -64,10 +67,10 @@ void MainWindow::on_STLSortpb_clicked()
     {
         sorted=true;
         sort(arr,arr+arrsize);
-        ui->ArrayDisplay->setText("");
+        ui->ArrayDisplay->clear();
         for (int i=0; i<arrsize; i++) //displaying sorted array
         {
-           ui->ArrayDisplay->setText(ui->ArrayDisplay->text() + "\n" + QString::number(arr[i]));
+          ui->ArrayDisplay->addItem(QString::number(arr[i]));
         }
         ui->UnsortedArrLabel->setText("Sorted Array");
     }
@@ -82,10 +85,10 @@ void MainWindow::on_MergeSortpb_clicked()
     {
         sorted=true;
            mergeSort(arr,0,arrsize-1);
-        ui->ArrayDisplay->setText("");
+         ui->ArrayDisplay->clear();
         for (int i=0; i<arrsize; i++) //displaying sorted array
         {
-           ui->ArrayDisplay->setText(ui->ArrayDisplay->text() + "\n" + QString::number(arr[i]));
+          ui->ArrayDisplay->addItem(QString::number(arr[i]));
         }
         ui->UnsortedArrLabel->setText("Sorted Array");
     }
@@ -94,7 +97,7 @@ void MainWindow::on_MergeSortpb_clicked()
 void MainWindow::mergeSort(int *array, int l, int r) {
    int m;
    if(l < r) {
-      int m = l+(r-l)/2;
+      m = l+(r-l)/2;
       mergeSort(array, l, m);
       mergeSort(array, m+1, r);
       merge(array, l, m, r);
