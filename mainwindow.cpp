@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include<QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -63,7 +64,10 @@ void MainWindow::on_STLSortpb_clicked()
     if (DataSetGenerated==true && sorted==false)
     {
         sorted=true;
+        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
         sort(arr,arr+arrsize);
+           std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
+           this->sorttime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
         ui->ArrayDisplay->setText("");
         for (int i=0; i<arrsize; i++) //displaying sorted array
         {
@@ -81,7 +85,10 @@ void MainWindow::on_MergeSortpb_clicked()
     if (DataSetGenerated==true && sorted==false)
     {
         sorted=true;
+        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
            mergeSort(arr,0,arrsize-1);
+           std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
+           this->sorttime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
         ui->ArrayDisplay->setText("");
         for (int i=0; i<arrsize; i++) //displaying sorted array
         {
@@ -89,6 +96,7 @@ void MainWindow::on_MergeSortpb_clicked()
         }
         ui->UnsortedArrLabel->setText("Sorted Array");
     }
+
 }
 
 void MainWindow::mergeSort(int *array, int l, int r) {
@@ -133,14 +141,14 @@ void MainWindow::merge(int *array, int l, int m, int r) {
    }
 }
 
-int MainWindow::binarySearch(int array[], int x, int low, int high) {
+bool MainWindow::binarySearch(int array[], int x, int low, int high) {
 
     // Repeat until the pointers low and high meet each other
   while (low <= high) {
     int mid = low + (high - low) / 2;
 
     if (array[mid] == x)
-      return mid;
+      return true;
 
     if (array[mid] < x)
       low = mid + 1;
@@ -149,7 +157,19 @@ int MainWindow::binarySearch(int array[], int x, int low, int high) {
       high = mid - 1;
   }
 
-  return -1;
+  return false;
+}
+
+bool MainWindow::normalSearch()
+{
+    for (int i=0; i<arrsize; i++)
+    {
+       if(arr[i] == (ui->SearchValueLineEdit->text()).toInt())
+       {
+          return true;
+       }
+    }
+   return false;
 }
 
 void MainWindow::on_pbfindit_clicked()
@@ -157,39 +177,44 @@ void MainWindow::on_pbfindit_clicked()
     if(DataSetGenerated == true)
     {
     if(SearchType == "Binary" && sorted==true)
-    {
-        int result = binarySearch(arr, (ui->SearchValueLineEdit->text()).toInt(), 0, arrsize - 1);
-        if(result == -1)
+    {        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+        bool result = binarySearch(arr, (ui->SearchValueLineEdit->text()).toInt(), 0, arrsize - 1);
+        std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
+        this->searchtime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
+
+        if(!result)
         {
-            ui->found->setText("NOT found");
+            QMessageBox::information(this,"REPORT","the time taken to search for this number in nanoseconds is "+QString::number(this->searchtime)+" and the time taken to sort the list was "+QString::number(this->sorttime));
+
+        }else
+        {
+          QMessageBox::information(this,"REPORT","There is no such number you blind");
         }
-        else
-            ui->found->setText("found");
     }
+
     else if (SearchType == "Binary" && sorted == false)
     {
         ui->SearchValueLineEdit->setText("Please sort array to use binary search!");
     }
     else if(SearchType == "Normal")
     {
-        bool x=false;
-        for (int i=0; i<arrsize; i++)
+        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+        bool found =normalSearch();
+        std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
+        this->sorttime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
+
+        if(found)
         {
-           if(arr[i] == (ui->SearchValueLineEdit->text()).toInt())
-           {
-               x=true;
-               //ui->found->setText("found");
-           }
-        }
-        if(x)
+            QMessageBox::information(this,"REPORT","the time taken to search for this number in nanoseconds is "+QString::number(this->searchtime)+" and the time taken to sort the list was "+QString::number(this->sorttime));
+
+        }else
         {
-            ui->found->setText("found");
-        }
-        else
-            ui->found->setText("NOT found");
+          QMessageBox::information(this,"REPORT","There is no such number you blind");        }
+
     }
-}
+    }
     else
         ui->found->setText("NO DATA GENERATED");
 }
+
 

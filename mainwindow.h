@@ -21,7 +21,8 @@ public:
     ~MainWindow();
     void mergeSort(int *array, int l, int r);
     void merge(int *array, int l, int m, int r);
-    int binarySearch(int array[], int x, int low, int high);
+    bool binarySearch(int array[], int x, int low, int high);
+    bool normalSearch();
 
 private slots:
     void on_GenerateDatasetpb_clicked();
@@ -42,6 +43,8 @@ private:
     QString SearchType;
     int arrsize;
     int *arr ;
+    int sorttime;
+    int searchtime;
 
 
 };
