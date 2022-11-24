@@ -14,19 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="ArrayDisplay">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>60</y>
-      <width>201</width>
-      <height>421</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="UnsortedArrLabel">
     <property name="geometry">
      <rect>
@@ -157,9 +144,9 @@
    <widget class="QLineEdit" name="SearchValueLineEdit">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>552</x>
       <y>250</y>
-      <width>113</width>
+      <width>201</width>
       <height>24</height>
      </rect>
     </property>
@@ -180,10 +167,33 @@
    <widget class="QLabel" name="found">
     <property name="geometry">
      <rect>
-      <x>600</x>
+      <x>560</x>
       <y>350</y>
-      <width>111</width>
+      <width>191</width>
       <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="ArrayDisplay">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>70</y>
+      <width>256</width>
+      <height>401</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="SortTypeLabel">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>40</y>
+      <width>131</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -197,7 +207,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

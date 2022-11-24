@@ -26,7 +26,7 @@ void MainWindow::on_GenerateDatasetpb_clicked()
     {
         DataSetGenerated = true;
         sorted = false;
-        ui->ArrayDisplay->setText("");
+        ui->ArrayDisplay->clear();
         arrsize = ui->InputDatasetSizeLineEdit->text().toInt();
         arr = new int[arrsize];
             for (int i=0; i<arrsize; i++) //filling array with random integers 1-99
@@ -35,10 +35,13 @@ void MainWindow::on_GenerateDatasetpb_clicked()
             }
             for (int i=0; i<arrsize; i++) //displaying unsorted array
             {
-               ui->ArrayDisplay->setText(ui->ArrayDisplay->text() + "\n" + QString::number(arr[i]));
+               ui->ArrayDisplay->addItem(QString::number(arr[i]));
             }
             ui->UnsortedArrLabel->setText("Unsorted Array");
     }
+
+
+
 }
 
 
@@ -63,15 +66,16 @@ void MainWindow::on_STLSortpb_clicked()
 {
     if (DataSetGenerated==true && sorted==false)
     {
+                ui->SortTypeLabel->setText("Sorted Using STL Sort");
         sorted=true;
         std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
         sort(arr,arr+arrsize);
            std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
            this->sorttime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
-        ui->ArrayDisplay->setText("");
+        ui->ArrayDisplay->clear();
         for (int i=0; i<arrsize; i++) //displaying sorted array
         {
-           ui->ArrayDisplay->setText(ui->ArrayDisplay->text() + "\n" + QString::number(arr[i]));
+          ui->ArrayDisplay->addItem(QString::number(arr[i]));
         }
         ui->UnsortedArrLabel->setText("Sorted Array");
     }
@@ -84,15 +88,16 @@ void MainWindow::on_MergeSortpb_clicked()
 
     if (DataSetGenerated==true && sorted==false)
     {
+        ui->SortTypeLabel->setText("Sorted Using Merge Sort");
         sorted=true;
         std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
            mergeSort(arr,0,arrsize-1);
            std::chrono::steady_clock::time_point then = std::chrono::steady_clock::now();
            this->sorttime=std::chrono::duration_cast<std::chrono::nanoseconds>(then-now).count();
-        ui->ArrayDisplay->setText("");
+         ui->ArrayDisplay->clear();
         for (int i=0; i<arrsize; i++) //displaying sorted array
         {
-           ui->ArrayDisplay->setText(ui->ArrayDisplay->text() + "\n" + QString::number(arr[i]));
+          ui->ArrayDisplay->addItem(QString::number(arr[i]));
         }
         ui->UnsortedArrLabel->setText("Sorted Array");
     }
@@ -102,7 +107,7 @@ void MainWindow::on_MergeSortpb_clicked()
 void MainWindow::mergeSort(int *array, int l, int r) {
    int m;
    if(l < r) {
-      int m = l+(r-l)/2;
+      m = l+(r-l)/2;
       mergeSort(array, l, m);
       mergeSort(array, m+1, r);
       merge(array, l, m, r);
